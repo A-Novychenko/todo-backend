@@ -14,6 +14,12 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
+const authRouter = require("./routes/api/auth");
+const todosRouter = require("./routes/api/todos");
+
+app.use("/api/users", authRouter);
+app.use("/api/todos", todosRouter);
+
 app.use((_, res, __) => {
   res.status(404).json({
     status: error,
@@ -42,7 +48,7 @@ mongoose
   .connect(DB_HOST)
   .then(() => {
     console.log(`Database connection successful`);
-    app.listen(3000, () => {
+    app.listen(PORT, () => {
       console.log(`Server running. Use our API on port: ${PORT}`);
     });
   })
