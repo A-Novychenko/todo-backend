@@ -1,3 +1,9 @@
-const register = require("./register");
+const {ctrlWrap} = require("../../helpers");
 
-module.exports = {register};
+const register = require("./register");
+const verifyEmail = require("./verifyEmail");
+
+module.exports = {
+  register: ctrlWrap(register),
+  verifyEmail: ctrlWrap(verifyEmail),
+};

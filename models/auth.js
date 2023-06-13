@@ -32,11 +32,11 @@ const userSchema = new Schema(
   {versionKey: false, timestamps: true}
 );
 
-const singupSchema = Joi.object({
+const registerSchema = Joi.object({
   login: Joi.string()
     .min(6)
     .required()
-    .messages({"any.required": "missing required field email"}),
+    .messages({"any.required": "missing required field login"}),
   email: Joi.string()
     .required()
     .email()
@@ -44,10 +44,10 @@ const singupSchema = Joi.object({
   password: Joi.string()
     .min(6)
     .required()
-    .messages({"any.required": "missing required field email"}),
+    .messages({"any.required": "missing required field password"}),
 });
 
-const authSchemas = {singupSchema};
+const authSchemas = {registerSchema};
 
 const User = model("user", userSchema);
 

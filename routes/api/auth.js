@@ -1,13 +1,14 @@
 const express = require("express");
-const {register} = require("../../controllers/auth");
 const router = express.Router();
 
-const validateBody = require("../../middlewares/validateBody");
+const {register, verifyEmail} = require("../../controllers/auth");
+
+const {validateBody} = require("../../middlewares");
 const {authSchemas} = require("../../models/auth");
 
-router.post("/register", validateBody(authSchemas.singupSchema), register);
+router.post("/register", validateBody(authSchemas.registerSchema), register);
 router.post("/login");
-router.get("/verify/:verifyCode");
+router.get("/verify/:verifyCode", verifyEmail);
 router.post("/verify");
 
 router.get("/current");
