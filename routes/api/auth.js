@@ -6,17 +6,26 @@ const {
   verifyEmail,
   resendVerifyEmail,
   login,
+  getCurrent,
+  logout,
 } = require("../../controllers/auth");
 
-const {validateBody} = require("../../middlewares");
+const {validateBody, authenticate} = require("../../middlewares");
 const {authSchemas} = require("../../models/auth");
 
 router.post("/register", validateBody(authSchemas.registerSchema), register);
-router.post("/login", login);
-router.get("/verify/:verifyCode", verifyEmail);
-router.post("/verify", resendVerifyEmail);
 
-router.get("/current");
-router.get("/logout");
+router.get("/verify/:verifyCode", verifyEmail);
+router.post(
+  "/verify",
+  validateBody(authSchemas.verifyEmailSchema),
+  resendVerifyEmail
+);
+
+router.post("/login", validateBody(authSchemas.loginSchema), login);
+
+router.get("/current", authenticate, getCurrent);
+
+router.get("/logout", authenticate, logout);
 
 module.exports = router;
