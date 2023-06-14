@@ -1,7 +1,7 @@
 const {HttpError} = require("../../helpers");
 const {Todos} = require("../../models/todos");
 
-const updateTodo = async (req, res) => {
+const updateStatus = async (req, res) => {
   const {id} = req.params;
   const todo = await Todos.findByIdAndUpdate(id, req.body, {
     new: true,
@@ -15,9 +15,8 @@ const updateTodo = async (req, res) => {
   res.status(200).json({
     status: "success",
     code: 200,
-    message: "Todo updated successfully",
+    message: "Todo status updated successfully",
     todo,
   });
 };
-
-module.exports = updateTodo;
+module.exports = updateStatus;

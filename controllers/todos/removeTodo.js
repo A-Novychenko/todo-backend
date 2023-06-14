@@ -1,23 +1,19 @@
 const {HttpError} = require("../../helpers");
 const {Todos} = require("../../models/todos");
 
-const updateTodo = async (req, res) => {
+const removeTodo = async (req, res) => {
   const {id} = req.params;
-  const todo = await Todos.findByIdAndUpdate(id, req.body, {
-    new: true,
-    select: "-owner",
-  });
+  const removeTodo = await Todos.findByIdAndRemove(id);
 
-  if (!todo) {
+  if (!removeTodo) {
     throw HttpError(404, `Not found Todo ID: ${id}`);
   }
 
   res.status(200).json({
     status: "success",
     code: 200,
-    message: "Todo updated successfully",
-    todo,
+    message: "Todo deleted successfully",
+    todo: removeTodo,
   });
 };
-
-module.exports = updateTodo;
+module.exports = removeTodo;
