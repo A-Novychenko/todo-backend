@@ -29,6 +29,7 @@ app.use((_, res, __) => {
   });
 });
 
+const {createErrorReq} = require("./helpers");
 app.use((err, req, res, next) => {
   const {status = 500, message = "Server error"} = err;
   const {statusText, codeErr, messageDescr, dataDescr} = createErrorReq(
