@@ -33,8 +33,28 @@ const addTodoSchema = Joi.object({
     .max(1000)
     .required()
     .messages({"any.required": "missing required field description"}),
+  title: Joi.string().min(1).max(100),
+  status: Joi.string().valid("normal", "important", "completed").messages({
+    "any.required":
+      "the field 'status' does not match the values ['normal', 'important', 'completed']",
+  }),
 });
 
-const todosJoiSchemas = {addTodoSchema};
+const updTodoSchema = Joi.object({
+  description: Joi.string().min(1).max(1000),
+  title: Joi.string().min(1).max(100),
+});
+
+const updStatusTodoSchema = Joi.object({
+  status: Joi.string()
+    .valid("normal", "important", "completed")
+    .required()
+    .messages({
+      "any.required":
+        "the required field 'status' is missing or does not match the values ['normal', 'important', 'completed']",
+    }),
+});
+
+const todosJoiSchemas = {addTodoSchema, updTodoSchema, updStatusTodoSchema};
 
 module.exports = {Todos, todosJoiSchemas};
