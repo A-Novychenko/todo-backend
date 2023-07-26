@@ -28,8 +28,8 @@ const register = async (req, res) => {
   });
 
   setTimeout(async () => {
-    const {verifyCode, _id} = await User.findById(newUser._id);
-    if (!verifyCode) {
+    const {verify, _id} = await User.findById(newUser._id);
+    if (!verify) {
       await User.findByIdAndRemove(_id);
     }
     return;

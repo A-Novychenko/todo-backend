@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const logger = require("morgan");
+const {createErrorReq} = require("./helpers");
 
 require("dotenv").config();
 
@@ -29,7 +30,6 @@ app.use((_, res, __) => {
   });
 });
 
-const {createErrorReq} = require("./helpers");
 app.use((err, req, res, next) => {
   const {status = 500, message = "Server error"} = err;
   const {statusText, codeErr, messageDescr, dataDescr} = createErrorReq(
