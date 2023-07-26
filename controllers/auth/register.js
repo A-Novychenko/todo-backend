@@ -38,7 +38,7 @@ const register = async (req, res) => {
   const verifyEmail = {
     to: email,
     subject: "TODO-APP verify  email",
-    html: `<h1>${verifyCode}</h1><a target="_blank" href="http://localhost:3000/verify?verifyCode:${verifyCode}">follow the link to verify</a>`,
+    html: `<h1>${verifyCode}</h1><a target="_blank" href="${BASE_URL}/verify?verifyCode:${verifyCode}">follow the link to verify</a>`,
     // html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${verifyCode}">Click verify email</a>`,
   };
 
